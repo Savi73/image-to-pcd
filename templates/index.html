@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101714">
+    <title>Roomscan | Image to floor plan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Roomscan home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span>roomscan<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-note"><span class="status-dot"></span> LOCAL WORKSPACE</div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="eyebrow"><span>01</span> FROM PHOTOS TO SPACE</div>
+          <h1>See your space<br>from a <em>new angle.</em></h1>
+          <p class="intro-copy">Turn a sequence of room photos into a stitched point cloud and a clean, measurable floor plan.</p>
+        </section>
+
+        <section class="workspace" aria-label="Room scan workflow">
+          <div class="workflow-head">
+            <div>
+              <p class="section-kicker">YOUR WORKSPACE</p>
+              <h2>New room scan</h2>
+            </div>
+            <span class="workflow-tag">3-STEP WORKFLOW</span>
+          </div>
+
+          <div class="steps" aria-label="Workflow steps">
+            <div class="step active" data-step="1"><span class="step-number">01</span><span>Upload</span></div>
+            <span class="step-connector"></span>
+            <div class="step" data-step="2"><span class="step-number">02</span><span>Convert</span></div>
+            <span class="step-connector"></span>
+            <div class="step" data-step="3"><span class="step-number">03</span><span>Register</span></div>
+          </div>
+
+          <div class="upload-panel" id="drop-zone">
+            <input id="image-input" type="file" accept=".jpg,.jpeg,image/jpeg" multiple hidden>
+            <div class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="upload-copy">
+              <h3>Drop your room photos here</h3>
+              <p>JPG only <span>·</span> 2–40 images <span>·</span> 500 MB total</p>
+            </div>
+            <button class="button button-outline" id="browse-button" type="button">Browse images</button>
+          </div>
+
+          <div class="selection-row" id="selection-row" hidden>
+            <div class="selection-summary">
+              <span class="selection-icon">▧</span>
+              <span><strong id="selection-count">0 images</strong><small id="selection-names"></small></span>
+            </div>
+            <button class="text-button" id="clear-button" type="button">Clear selection</button>
+          </div>
+
+          <div class="action-grid">
+            <button class="button button-primary" id="upload-button" type="button" disabled>
+              <span class="button-step">01</span><span>Upload images</span><span class="button-arrow">↗</span>
+            </button>
+            <button class="button button-secondary" id="convert-button" type="button" disabled>
+              <span class="button-step">02</span><span>Convert to point cloud</span><span class="button-arrow">↗</span>
+            </button>
+            <button class="button button-secondary" id="register-button" type="button" disabled>
+              <span class="button-step">03</span><span>Register &amp; create floor plan</span><span class="button-arrow">↗</span>
+            </button>
+          </div>
+
+          <div class="progress-area" id="progress-area" hidden>
+            <div class="progress-spinner" aria-hidden="true"></div>
+            <div><strong id="progress-title">Working on your scan</strong><p id="progress-description">This can take a few minutes on the first run.</p></div>
+          </div>
+          <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+          <div class="results" id="results" hidden>
+            <div class="results-title"><span class="result-check">✓</span><div><strong>Room scan ready</strong><p>Your registered outputs are ready to download.</p></div></div>
+            <section class="cloud-viewer" aria-label="Merged point cloud preview">
+              <div class="viewer-heading">
+                <div><h3>Merged point cloud</h3><p id="viewer-stats">Preparing preview…</p></div>
+                <button class="viewer-reset" id="viewer-reset" type="button" aria-label="Reset point cloud view">RESET VIEW</button>
+              </div>
+              <div class="viewer-stage">
+                <canvas id="cloud-canvas" aria-label="Interactive 3D merged point cloud preview" role="img"></canvas>
+                <div class="viewer-loading" id="viewer-loading"><span class="progress-spinner" aria-hidden="true"></span><span id="viewer-message">Loading point cloud preview…</span></div>
+                <div class="viewer-hint">DRAG TO ORBIT <span>·</span> SCROLL TO ZOOM</div>
+              </div>
+            </section>
+            <div class="download-list" id="download-list"></div>
+          </div>
+          <p class="privacy-note"><span aria-hidden="true">⌑</span> Your images are processed locally and never leave this machine.</p>
+        </section>
+
+        <footer class="footer"><span>ROOMSCAN STUDIO</span><span>DEPTH · GEOMETRY · SPACE</span></footer>
+      </main>
+    </div>
+  </body>
+</html>

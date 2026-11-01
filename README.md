@@ -33,6 +33,15 @@ To convert depth maps into metric point clouds, use the `depth_to_pointcloud.py`
 #### HEIC to PNG Conversion
 If your input images are in HEIC format, convert them to PNG using the `heic2png.py` script.
 
+#### Web UI
+Start the local browser UI from the repository root:
+
+```bash
+python app.py
+```
+
+Open `http://127.0.0.1:5000`, select at least two JPG room photos, and follow the upload, point-cloud conversion, and registration steps. After registration, inspect the merged point cloud in the interactive home-page preview: drag to orbit and scroll to zoom. The merged point cloud and extracted floor-plan point cloud are also available to download. The UI requires the dependencies in `requirements.txt`, the camera calibration file, and the indoor model checkpoint.
+
 ### Model Checkpoints
 
 ------------

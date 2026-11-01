@@ -3,3 +3,6 @@
 *.pth
 *.png
 *.ply
+web_jobs/
+__pycache__/
+*.py[cod]
